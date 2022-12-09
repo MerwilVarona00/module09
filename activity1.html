@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, tr{
+                border: 3px solid gray;
+                border-collapse: collapse;
+                padding: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 50px;
+                width: 40%;
+                text-align: center;
+            }
+            table tr:nth-child(odd){
+                background-color: #ffffff;
+            }
+            table tr:nth-child(even){
+                background-color: #cecece;
+            }
+            h2{
+                text-align: center;
+                padding-top: 30px;
+                font-family: "Lucida Console", "Courier New", monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Angular JS AJAX Application</h2>
+        <br>
+        <br>
+        <div ng-app="" ng-controller="employeeController">
+            <table style="width:100%">
+                <tr>
+                    <th style="width:20%">ID</th>
+                    <th style="width:30%">Name</th>
+                    <th style="width:20%">Age</th>
+                    <th style="width:30%">Salary</th>
+                </tr>
+                <tr ng-repeat = "employee in employees">
+                    <td>{{employee.id}}</td>
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.age}}</td>
+                    <td>{{employee.salary}}</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            function employeeController($scope, $http){
+                var url = "http://localhost/pdc20/api_r.php";
+                // var url = "employee.txt";
+                $http.get(url).success(function(response){
+                    $scope.employees = response;    
+                })
+            }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>    
+    </body>
+</html>
